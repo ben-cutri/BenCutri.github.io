@@ -1,0 +1,6 @@
+numpy
+opencv-python
+matplotlib
+Adafruit_GPIO
+Adafruit_MCP3008
+

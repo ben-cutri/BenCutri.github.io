@@ -1,0 +1,42 @@
+#!/usr/bin/env python
+
+import rospy
+import math
+from visualization_msgs.msg import Marker
+from geometry_msgs.msg import Point
+import random
+
+start_point= Point()
+end_point= Point()
+
+def mark():
+    rospy.init_node('evader')
+    pub = rospy.Publisher('marker',Marker,queue_size=10)
+    rate=rospy.Rate(10)
+    while not rospy.is_shutdown():
+	marker2=Marker()
+	marker2.header.frame_id="/base_link"		
+	marker2.header.stamp=rospy.Time.now()
+	marker2.ns="markerline"
+	marker2.type=Marker.LINE_STRIP
+	marker2.action = Marker.ADD
+	marker2.pose.orientation.w=1.0
+	marker2.id=0	
+	marker2.scale.x=0.1	     #thickness of line
+	marker2.color.r=1.0           #line_strip is red in color	
+	marker2.color.a=1.0
+	start_point.x = 1.0
+   	start_point.y = 4.0
+   	start_point.z = 0.0
+	end_point.x = 6.0
+   	end_point.y = 7.0
+   	end_point.z = 0.0
+	marker2.points.append(start_point)
+        marker2.points.append(end_point)
+	pub.publish(marker2)	
+        rate.sleep()
+    rospy.spin()
+
+
+if __name__ == '__main__':
+    con()
